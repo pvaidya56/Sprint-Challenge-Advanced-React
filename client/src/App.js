@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
+import PlayerMap from './components/PlayerMap'
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      data: []
+      players: []
     };
   }
 
@@ -15,12 +16,14 @@ class App extends React.Component {
       .get("http://localhost:5000/api/players")
       .then((res) => {
         console.log(res.data);
-        this.setState({ data: res.data });
+        this.setState({ players: res.data });
       })
       .catch(err => console.log(err));
   }
   render() {
-    return <div className="App"></div>
+    return <div className="App">
+      <PlayerMap players={this.state.players} />
+    </div>
   }
 }
 export default App;
